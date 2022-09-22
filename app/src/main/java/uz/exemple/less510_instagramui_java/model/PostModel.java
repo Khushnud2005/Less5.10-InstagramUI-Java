@@ -5,16 +5,19 @@ public class PostModel {
     private String fullname;
     private int photo = 0;
     private int[] photos = null;
+    private boolean isAdd = false;
 
-    public PostModel(int profile, String fullname, int photo) {
+    public PostModel(int profile, String fullname, int photo,boolean isAdd) {
         this.profile = profile;
         this.fullname = fullname;
         this.photo = photo;
+        this.isAdd = isAdd;
     }
-    public PostModel(int profile, String fullname, int[] photos) {
+    public PostModel(int profile, String fullname, int[] photos,boolean isAdd) {
         this.profile = profile;
         this.fullname = fullname;
         this.photos = photos;
+        this.isAdd = isAdd;
     }
 
     public int getProfile() {
@@ -31,5 +34,9 @@ public class PostModel {
 
     public int[] getPhotos() {
         return photos;
+    }
+
+    public boolean isAdd() {
+        return isAdd;
     }
 }

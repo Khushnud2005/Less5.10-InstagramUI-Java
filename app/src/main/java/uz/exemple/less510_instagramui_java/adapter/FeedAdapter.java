@@ -30,7 +30,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     int ITEM_STORY = 0;
     int ITEM_POST = 1;
     int ITEM_POST_2X = 2;
-    int ITEM_POST_3X = 3;
+    int ITEM_POST_ADD = 3;
 
     public FeedAdapter(Context context, ArrayList<FeedModel> items) {
         this.context = context;
@@ -41,9 +41,13 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemViewType(int position) {
         FeedModel item = items.get(position);
         if (item.getStories().size()>0){
+            Log.d("###","STORIES POSITION = "+position);
             return ITEM_STORY;
         }else if(item.getPost().getPhotos() !=null){
             return ITEM_POST_2X;
+        }else if (item.getPost().isAdd() ){
+            Log.d("###","ADD_POST = "+item.getPost().isAdd());
+            return ITEM_POST_ADD;
         }
         return ITEM_POST;
     }
@@ -57,6 +61,9 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }else if (viewType == ITEM_POST_2X){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post_2x_photo,parent,false);
             return new Post2XViewHolder(view);
+        }else if (viewType == ITEM_POST_ADD){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_add_post,parent,false);
+            return new AddPostViewHolder(view);
         }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_feed_post,parent,false);
         return new PostViewHolder(view);
@@ -91,6 +98,17 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ImageView iv_profile = ((PostViewHolder) holder).iv_profile;
             ImageView iv_photo = ((PostViewHolder) holder).iv_photo;
             TextView tv_fullname = ((PostViewHolder) holder).tv_fullname;
+
+            iv_profile.setImageResource(item.getPost().getProfile());
+            iv_photo.setImageResource(item.getPost().getPhoto());
+            tv_fullname.setText(item.getPost().getFullname());
+        }
+
+        if (holder instanceof AddPostViewHolder) {
+
+            ImageView iv_profile = ((AddPostViewHolder) holder).iv_profile;
+            ImageView iv_photo = ((AddPostViewHolder) holder).iv_photo;
+            TextView tv_fullname = ((AddPostViewHolder) holder).tv_fullname;
 
             iv_profile.setImageResource(item.getPost().getProfile());
             iv_photo.setImageResource(item.getPost().getPhoto());
@@ -136,6 +154,19 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tv_caption = itemView.findViewById(R.id.tv_caption);
         }
     }
+
+    public class AddPostViewHolder extends RecyclerView.ViewHolder{
+        ImageView iv_profile;
+        ImageView iv_photo;
+        TextView tv_fullname;
+        public AddPostViewHolder(@NonNull View itemView) {
+            super(itemView);
+            iv_profile = itemView.findViewById(R.id.iv_profile);
+            tv_fullname = itemView.findViewById(R.id.tv_fullname);
+            iv_photo = itemView.findViewById(R.id.iv_photo);
+        }
+    }
+    
     public class Post2XViewHolder extends RecyclerView.ViewHolder{
         ImageView iv_profile;
         LinearLayout ll_2x_photo;

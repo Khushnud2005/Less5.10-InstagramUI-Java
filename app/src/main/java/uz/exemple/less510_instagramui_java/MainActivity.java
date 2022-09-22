@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<FeedModel> feeds  = new  ArrayList<FeedModel>();
         feeds.add(new FeedModel(stories));
-        feeds.add(new FeedModel(new PostModel(R.drawable.profile1, "Anvar", getTwoPhotos())));
-        feeds.add(new FeedModel(new PostModel(R.drawable.profile3, "Sarvar", getThreePhotos())));
-        feeds.add(new FeedModel(new PostModel(R.drawable.profile1, "Anvar", R.drawable.photo1)));
-        feeds.add(new FeedModel(new PostModel(R.drawable.profile2, "Qambar", R.drawable.photo2)));
-        feeds.add(new FeedModel(new PostModel(R.drawable.profile3, "Sarvar", R.drawable.photo3)));
-        feeds.add(new FeedModel(new PostModel(R.drawable.profile4, "Yamach", R.drawable.photo4)));
+        feeds.add(new FeedModel(new PostModel(R.drawable.profile1, "Anvar", getTwoPhotos(),false)));
+        feeds.add(new FeedModel(new PostModel(R.drawable.profile3, "Sarvar", getThreePhotos(),false)));
+        feeds.add(new FeedModel(new PostModel(R.drawable.profile1, "Anvar", R.drawable.photo8,true)));
+        feeds.add(new FeedModel(new PostModel(R.drawable.profile2, "Qambar", R.drawable.photo2,false)));
+        feeds.add(new FeedModel(new PostModel(R.drawable.profile3, "Sarvar", R.drawable.photo3,false)));
+        feeds.add(new FeedModel(new PostModel(R.drawable.profile4, "Yamach", R.drawable.photo4,false)));
 
         return feeds;
     }
